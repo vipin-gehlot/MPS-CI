@@ -1,0 +1,5 @@
+Secure-Messaging,git@ops-tgit1.prd.yaanatech.com:MPS/secure-messaging.git,Secure Messaging Service build Job,BUILD|DOCKER_ARTIFACTS|QA_DEPLOY|TEST_SANITY|TEST_REGRESSION|STAG_DEPLOY|PROD_DEPLOY|PIPELINE
+Random-Data-Service,git@ops-tgit1.prd.yaanatech.com:MPS/random-data-provider.git,Random Data Service build Job,BUILD|DOCKER_ARTIFACTS|QA_DEPLOY|TEST_SANITY|PIPELINE
+MPS-Core,git@ops-tgit1.prd.yaanatech.com:MPS/mps-core.git,MPS Core Components build job,BUILD|DOCKER_ARTIFACTS|QA_DEPLOY|TEST_SANITY|STAG_DEPLOY|PROD_DEPLOY|PIPELINE
+Auth-Service,git@ops-tgit1.prd.yaanatech.com:MPS/auth-service.git, OAuth2 authentication server build job,BUILD|DOCKER_ARTIFACTS|QA_DEPLOY|TEST_SANITY|TEST_REGRESSION|STAG_DEPLOY|PROD_DEPLOY|PIPELINE
+KMS,git@ops-tgit1.prd.yaanatech.com:MPS/kms.git,Key Management System,BUILD|DOCKER_ARTIFACTS|QA_DEPLOY|TEST_SANITY|TEST_REGRESSION|STAG_DEPLOY|PROD_DEPLOY|PIPELINE

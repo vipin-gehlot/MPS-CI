@@ -1,0 +1,61 @@
+apply plugin: 'groovy'
+apply plugin: 'idea' 
+sourceSets {
+    jobs {
+        groovy {
+            srcDirs 'jobs'
+        }
+    }
+}
+
+ext {
+    ishiArchivaInternalUrl = "http://ops-tarchiva1.prd.yaanatech.com:8080/repository/mps-release"
+    ishiArchivaSnapshotsUrl = "http://ops-tarchiva1.prd.yaanatech.com:8080/repository/mps-snapshots"
+    ishiArchivaUser = "mps"
+    ishiArchivaPwd = "mps#!23"
+}
+
+repositories {
+    maven {
+        url ishiArchivaInternalUrl
+        credentials {
+            username ishiArchivaUser
+            password ishiArchivaPwd
+        }
+    }
+    maven { url 'http://repo.jenkins-ci.org/releases/' }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.4.5'
+    compile 'org.codehaus.groovy:groovy-all:2.4.5'
+    compile 'org.jenkins-ci.plugins:job-dsl-core:1.40'
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
+
+    // for the RestApiScriptRunner
+    compile('org.codehaus.groovy.modules.http-builder:http-builder:0.7.2') {
+        exclude(module: 'groovy')
+    }
+
+     //for the RestApiScriptRunner and XmlOutputRunner
+     compile('ant:ant:1.7.0')
+}
+
+task rest(dependsOn: 'classes', type: JavaExec) {
+    main = 'com.yt.mps.jenkins.rest.RestApiScriptRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperties System.getProperties()
+}
+
+task debugXml(dependsOn: 'classes', type: JavaExec) {
+    main = 'com.yt.mps.jenkins.debug.XmlOutputRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperties System.getProperties()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
+

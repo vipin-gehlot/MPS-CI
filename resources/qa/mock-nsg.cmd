@@ -1,0 +1,1 @@
+ curl --insecure -d @mock-nsg.json -H "Content-Type: application/json" --user admin:admin  https://172.21.82.72/marathon/v2/apps
