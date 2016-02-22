@@ -16,13 +16,7 @@ ext {
 }
 
 repositories {
-    maven {
-        url ishiArchivaInternalUrl
-        credentials {
-            username ishiArchivaUser
-            password ishiArchivaPwd
-        }
-    }
+    mavenCentral()
     maven { url 'http://repo.jenkins-ci.org/releases/' }
 }
 
