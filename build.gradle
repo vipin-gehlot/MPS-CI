@@ -17,6 +17,7 @@ ext {
 
 repositories {
     mavenCentral()
+    maven {url 'http://repo.spring.io/libs-release-remote/'}
     maven { url 'http://repo.jenkins-ci.org/releases/' }
 }
 
