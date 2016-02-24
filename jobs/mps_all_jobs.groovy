@@ -63,6 +63,10 @@ readFileFromWorkspace("resources/projects.txt").eachLine {
         job("$folderName/$projectName-QA-Deploy") {
             description(PipeLineOptions.QA_DEPLOY.getDesc())
             logRotator(5,5)
+
+            environmentVariables {
+                propertiesFile('resources/qa/env.properties')
+            }
             steps {
                 shell readFileFromWorkspace('resources/qa-deploy.sh')
             }
