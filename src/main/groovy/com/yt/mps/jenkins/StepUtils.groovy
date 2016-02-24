@@ -1,6 +1,6 @@
 package com.yt.mps.jenkins
 
-class StepsUtil {
+class StepUtils {
 
     static void proxiedGradle(context, String gradleTasks) {
         context.with {

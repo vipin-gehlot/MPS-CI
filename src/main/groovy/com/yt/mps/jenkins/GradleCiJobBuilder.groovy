@@ -12,7 +12,7 @@ class GradleCiJobBuilder {
     String description
     String gitUrl
     String gitSSHCredentials
-    String gitBranch = 'develop'
+    String gitBranch = 'origin/develop'
     String downStreamProject
     String gradleVersion = 'gradle-2.7'
     String pollScmSchedule = 'H/05 * * * *'

@@ -1,1 +1,20 @@
-
+{
+  "id": "mock-nsg",
+  "instances": 2,
+  "cpus": 0.5,
+  "mem": 512,
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirrus-node3.dev.yaanatech.net:5000/mock-nsg:1.0.0",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9095, "hostPort": 0, "servicePort": 0, "protocol": "tcp" }
+      ]
+    },
+    "forcePullImage": true,
+    "volumes" : [],
+    "privileged": false
+  }
+}

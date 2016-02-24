@@ -3,9 +3,6 @@ package com.yt.mps.jenkins
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 
-/**
- * Created by vipin.gehlot on 11/25/2015.
- */
 class DeployJobBuilder {
 
     String name
@@ -18,7 +15,7 @@ class DeployJobBuilder {
             it.description(this.description)
             logRotator {
                 numToKeep(5)
-                artifactNumToKeep(1)
+                artifactNumToKeep(5)
             }
             steps{
                 shell (readFileFromWorkspace('resources/qa-deploy.sh'))

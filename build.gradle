@@ -50,6 +50,12 @@ task debugXml(dependsOn: 'classes', type: JavaExec) {
     systemProperties System.getProperties()
 }
 
+task deployApp(dependsOn: 'classes', type: JavaExec){
+    main = 'com.yt.mps.jenkins.deploy.DeployHelper'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperties System.getProperties()
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
