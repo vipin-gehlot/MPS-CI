@@ -64,9 +64,9 @@ readFileFromWorkspace("resources/projects.txt").eachLine {
             description(PipeLineOptions.QA_DEPLOY.getDesc())
             logRotator(5,5)
 
-            environmentVariables {
+            /*environmentVariables {
                 propertiesFile('resources/qa/env.properties')
-            }
+            }*/
             steps {
                 shell readFileFromWorkspace('resources/qa-deploy.sh')
             }
