@@ -64,11 +64,22 @@ readFileFromWorkspace("resources/projects.txt").eachLine {
             description(PipeLineOptions.QA_DEPLOY.getDesc())
             logRotator(5,5)
 
-            /*environmentVariables {
-                propertiesFile('resources/qa/env.properties')
-            }*/
+            scm {
+                git {
+                    remote {
+                        url 'https://github.com/vipin-gehlot/MPS-CI'
+                    }
+                    branch('master')
+                }
+            }
             steps {
-                shell readFileFromWorkspace('resources/qa-deploy.sh')
+                environmentVariables {
+                    propertiesFile('resources/qa/env.properties')
+                }
+                gradle { node ->
+                    tasks("clean deployApp")
+                    gradleName(gradleVersion)
+                }
             }
             publishers {
                 downstream("$folderName/$projectName-SanityTests")

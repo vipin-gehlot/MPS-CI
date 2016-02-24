@@ -37,9 +37,6 @@ class GradleCiJobBuilder {
             it.description this.description
             logRotator(5,5)
             blockOnDownstreamProjects()
-//            if (envVarMap) {
-//                environmentVariables(envVarMap)
-//            }
             if (runJobOnNode) {
                 label(runJobOnNode)
             }
