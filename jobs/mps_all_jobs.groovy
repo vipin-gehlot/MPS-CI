@@ -63,7 +63,6 @@ readFileFromWorkspace("resources/projects.txt").eachLine {
         job("$folderName/$projectName-QA-Deploy") {
             description(PipeLineOptions.QA_DEPLOY.getDesc())
             logRotator(5,5)
-
             scm {
                 git {
                     remote {
@@ -79,6 +78,7 @@ readFileFromWorkspace("resources/projects.txt").eachLine {
                 gradle { node ->
                     tasks("clean deployApp")
                     gradleName(gradleVersion)
+                    useWrapper(false)
                 }
             }
             publishers {
