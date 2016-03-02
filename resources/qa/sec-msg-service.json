@@ -1,0 +1,21 @@
+{
+  "id": "sec-msg-service",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=qa -jar /app.jar --mps.core.cassandra.contactPoints=<TBD> --mps.core.cassandra.port=9092 spring.datasource.url=<jdbc:mysql://TBD:3306/mpsauthdb?autoReconnect=true>",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirrus-node3.dev.yaanatech.net:5000/sec-msg-service:1.0.0",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9090, "hostPort": 9090, "servicePort": 0, "protocol": "tcp" },
+        { "containerPort": 8888, "hostPort": 7004, "servicePort": 0, "protocol": "tcp" }
+      ]
+    },
+    "forcePullImage": true,
+    "volumes" : [],
+    "privileged": false
+  }
+}

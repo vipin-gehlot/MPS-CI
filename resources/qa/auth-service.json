@@ -3,14 +3,14 @@
   "instances": 1,
   "cpus": 0.5,
   "mem": 512,
-  "cmd": "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar --default.response.directory.path=/tmp --spring.datasource.url=jdbc:mysql://localhost:3306/mpsauthdb ",
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=qa -jar /app.jar --default.response.directory.path=/tmp --spring.datasource.url=jdbc:mysql://localhost:3306/mpsauthdb ",
   "container": {
     "type": "DOCKER",
     "docker": {
       "image": "cirrus-node3.dev.yaanatech.net:5000/auth-service:1.0.0",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8081, "hostPort": 0, "servicePort": 0, "protocol": "tcp" }
+        { "containerPort": 8080, "hostPort": 10080, "servicePort": 0, "protocol": "tcp" }
       ]
     },
     "forcePullImage": true,

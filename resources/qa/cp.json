@@ -1,0 +1,18 @@
+{
+  "id": "cp",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "constraints": [["hostname", "UNIQUE"]],
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=qa -jar /app.jar --callbackHost=gmr.tel-lb.yaanatech.com --callbackPort=80 --nsgHost=mock-nsg.service.consul --nsgPort=9095 --mps.core.cassandra.contactPoints=<TBD> --mps.core.cassandra.port=9042 --mgt.db.url=<TBD>",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirrus-node3.dev.yaanatech.net:5000/cp:1.0.0",
+      "network": "BRIDGE"
+    },
+    "forcePullImage": true,
+    "volumes" : [],
+    "privileged": false
+  }
+}

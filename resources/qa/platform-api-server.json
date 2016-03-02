@@ -1,0 +1,21 @@
+{
+  "id": "platform-api-server",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "constraints": [["hostname", "UNIQUE"]],
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=qa -jar /app.jar --mps.core.cassandra.contactPoints=<TBD> --mps.core.cassandra.port=9042",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirrus-node3.dev.yaanatech.net:5000/platform-api-service:1.0.0",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 8080, "servicePort": 0, "protocol": "tcp" }
+      ]
+    },
+    "forcePullImage": true,
+    "volumes" : [],
+    "privileged": false
+  }
+}

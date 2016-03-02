@@ -44,7 +44,6 @@ public class MarathonAppDeployer {
             requestContentType: 'application/json'
         )
         if(resp.status != HttpStatus.SC_OK ){
-            logFailure("$MARATHON_API_URI/$appName", resp.status, resp.reasonPhrase)
             return false;
         }
         return true;
@@ -57,7 +56,7 @@ public class MarathonAppDeployer {
                 requestContentType: 'application/json',
         )
         if(resp.status != HttpStatus.SC_OK ){
-            logFailure("$MARATHON_API_URI/$appName", resp. resp.status, resp.reasonPhrase)
+            logFailure("$MARATHON_API_URI/$appName", resp.status, "")
             return false;
         }
         return true;
@@ -69,8 +68,8 @@ public class MarathonAppDeployer {
                 body: jsonBody,
                 requestContentType: 'application/json',
         )
-        if(resp.status != HttpStatus.SC_OK ){
-            logFailure("$MARATHON_API_URI/$appName", resp.status, resp.reasonPhrase)
+        if(resp.status != HttpStatus.SC_CREATED ){
+            logFailure("$MARATHON_API_URI/$appName".toString(), resp.status, "")
             return false;
         }
         return true;
@@ -81,7 +80,7 @@ public class MarathonAppDeployer {
         new File(filePath).text
     }
 
-    private void logFailure(String uri ,HttpStatus status, String reason){
+    private void logFailure(GString uri ,HttpStatus status, String reason){
         println("ERROR: Http operation failed for : $uri, status code = $status, Reason = $reason")
         AssertionError
     }

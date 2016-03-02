@@ -1,0 +1,22 @@
+{
+  "id": "random-data-proxy",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "constraints": [["hostname", "UNIQUE"]],
+  "cmd": "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=qa -jar /app.jar",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirrus-node3.dev.yaanatech.net:5000/random-data-proxy:1.0.0",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 10010, "servicePort": 0, "protocol": "tcp" },
+        { "containerPort": 9091, "hostPort": 6004, "servicePort": 0, "protocol": "tcp" }
+      ]
+    },
+    "forcePullImage": true,
+    "volumes" : [],
+    "privileged": false
+  }
+}

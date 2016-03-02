@@ -1,6 +1,6 @@
 {
   "id": "mock-nsg",
-  "instances": 2,
+  "instances": 1,
   "cpus": 0.5,
   "mem": 512,
   "cmd": "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar",

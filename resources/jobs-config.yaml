@@ -1,0 +1,288 @@
+---
+!com.yt.mps.jenkins.domain.ProjectPipeline
+projectName:  "Secure-Messaging"
+projectDesc:  "Secure Messaging Service build Job"
+gitRepo:  "git@ops-tgit1.prd.yaanatech.com:MPS/secure-messaging.git"
+repoBranch: "origin/develop"
+defaultRepoCredentials: "eb99a03b-f05b-4bc1-b81e-636f73652ff9"
+defaultBuildToolVersion: "gradle-2.7"
+pipelinePhases:
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  BUILD
+     jobType: "GRADLE"
+     buildCommand:  "clean build runIT copyCoverageData copyIntegrationCoverageData mergeCoverageData generateBranchName sonarRunner"
+     downStreamProjects: "DOCKER_ARTIFACTS"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  DOCKER_ARTIFACTS
+     jobType: "GRADLE"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "buildDocker"
+     downStreamProjects: "QA_DEPLOY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  QA_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     envVarFilePath:  "resource/qa/env.properties"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  TEST_SANITY
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+     downStreamProjects: "TEST_REGRESSION"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase: TEST_REGRESSION
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  STAG_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  PROD_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+
+---
+
+!com.yt.mps.jenkins.domain.ProjectPipeline
+projectName:  "Random-Data-Service"
+projectDesc:  "Build Pipeline for Random Data Service components"
+gitRepo:  "git@ops-tgit1.prd.yaanatech.com:MPS/random-data-provider.git"
+repoBranch: "origin/develop"
+defaultRepoCredentials: "eb99a03b-f05b-4bc1-b81e-636f73652ff9"
+defaultBuildToolVersion: "gradle-2.7"
+pipelinePhases:
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  BUILD
+     jobType: "GRADLE"
+     buildCommand:  "clean build runIT copyCoverageData copyIntegrationCoverageData mergeCoverageData generateBranchName sonarRunner"
+     downStreamProjects: "DOCKER_ARTIFACTS"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  DOCKER_ARTIFACTS
+     jobType: "GRADLE"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "buildDocker"
+     downStreamProjects: "QA_DEPLOY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  QA_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     envVarFilePath:  "resource/qa/env.properties"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  TEST_SANITY
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+     downStreamProjects: "TEST_REGRESSION"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase: TEST_REGRESSION
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  STAG_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  PROD_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+
+---
+
+!com.yt.mps.jenkins.domain.ProjectPipeline
+projectName:  "MPS-Core"
+projectDesc:  "Build Pipeline for MPS-Core components"
+gitRepo:  "git@ops-tgit1.prd.yaanatech.com:MPS/mps-core.git"
+repoBranch: "origin/develop"
+defaultRepoCredentials: "eb99a03b-f05b-4bc1-b81e-636f73652ff9"
+defaultBuildToolVersion: "gradle-2.7"
+pipelinePhases:
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  BUILD
+     jobType: "GRADLE"
+     buildCommand:  "clean build runIT copyCoverageData copyIntegrationCoverageData mergeCoverageData generateBranchName sonarRunner"
+     downStreamProjects: "DOCKER_ARTIFACTS"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  DOCKER_ARTIFACTS
+     jobType: "GRADLE"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "buildDocker"
+     downStreamProjects: "QA_DEPLOY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  QA_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     envVarFilePath:  "resource/qa/env.properties"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  TEST_SANITY
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+     downStreamProjects: "TEST_REGRESSION"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase: TEST_REGRESSION
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  STAG_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  PROD_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+
+---
+
+
+!com.yt.mps.jenkins.domain.ProjectPipeline
+projectName:  "Auth-Service"
+projectDesc:  "Build Pipeline for Oauth2 Server components"
+gitRepo:  "git@ops-tgit1.prd.yaanatech.com:MPS/auth-service.git"
+repoBranch: "origin/develop"
+defaultRepoCredentials: "eb99a03b-f05b-4bc1-b81e-636f73652ff9"
+defaultBuildToolVersion: "gradle-2.7"
+pipelinePhases:
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  BUILD
+     jobType: "GRADLE"
+     buildCommand:  "clean build runIT copyCoverageData copyIntegrationCoverageData mergeCoverageData generateBranchName sonarRunner"
+     downStreamProjects: "DOCKER_ARTIFACTS"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  DOCKER_ARTIFACTS
+     jobType: "GRADLE"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "buildDocker"
+     downStreamProjects: "QA_DEPLOY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  QA_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     envVarFilePath:  "resource/qa/env.properties"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  TEST_SANITY
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+     downStreamProjects: "TEST_REGRESSION"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase: TEST_REGRESSION
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  STAG_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  PROD_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+
+---
+
+!com.yt.mps.jenkins.domain.ProjectPipeline
+projectName:  "KMS"
+projectDesc:  "Build Pipeline for Key Management System (KMS) components"
+gitRepo:  "git@ops-tgit1.prd.yaanatech.com:MPS/kms.git"
+repoBranch: "origin/develop"
+defaultRepoCredentials: "eb99a03b-f05b-4bc1-b81e-636f73652ff9"
+defaultBuildToolVersion: "gradle-2.7"
+pipelinePhases:
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  BUILD
+     jobType: "GRADLE"
+     buildCommand:  "clean build runIT copyCoverageData copyIntegrationCoverageData mergeCoverageData generateBranchName sonarRunner"
+     downStreamProjects: "DOCKER_ARTIFACTS"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  DOCKER_ARTIFACTS
+     jobType: "GRADLE"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "buildDocker"
+     downStreamProjects: "QA_DEPLOY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  QA_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     envVarFilePath:  "resource/qa/env.properties"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  TEST_SANITY
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+     downStreamProjects: "TEST_REGRESSION"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase: TEST_REGRESSION
+     jobType: "MAVEN"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "clean install"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  STAG_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+     downStreamProjects: "TEST_SANITY"
+
+   - !com.yt.mps.jenkins.domain.PipelinePhase
+     phase:  PROD_DEPLOY
+     jobType: "DEPLOY"
+     runJobOnNode:  "ops-tjs-mps1.prd.yaanatech.com"
+     buildCommand:  "deployApp"
+
+
+
+

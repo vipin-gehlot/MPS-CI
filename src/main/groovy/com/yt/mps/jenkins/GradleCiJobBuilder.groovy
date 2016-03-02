@@ -19,6 +19,7 @@ class GradleCiJobBuilder {
     String tasks
     String switches =''
     Boolean useWrapper = false
+    String buildEnvVarFilePath;
     //String junitResults = '**/build/test-results/*.xml'
     //String artifacts = '**/build/libs/*.jar'
     List<String> emails = []
@@ -55,6 +56,11 @@ class GradleCiJobBuilder {
                 scm this.pollScmSchedule
             }
             steps {
+                if(buildEnvVarFilePath){
+                    environmentVariables {
+                        propertiesFile(buildEnvVarFilePath)
+                    }
+                }
                 gradle { node ->
                     tasks(this.tasks)
                     switches(this.switches)
